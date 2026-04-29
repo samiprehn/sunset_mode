@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Sunset Mode",
+  "version": "0.1.0",
+  "description": "Thirty minutes before San Diego sunset, your browser warms its color temperature, surfaces tonight's best viewpoint, and gently nudges you outside.",
+  "permissions": ["alarms", "notifications", "storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["overlay.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Sunset Mode",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

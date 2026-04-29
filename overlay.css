@@ -1,0 +1,12 @@
+/* Plain translucent amber wash — like an orange filter over the screen.
+   Avoids mix-blend-mode because it goes invisible on near-white or near-black
+   backgrounds. Trade-off: slight contrast loss, but visible everywhere. */
+#sunset-mode-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2147483647;
+    background: linear-gradient(180deg, #ff8c46 0%, #e85a2a 100%);
+    opacity: 0;
+    transition: opacity 4s linear;
+}

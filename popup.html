@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <header>
+        <h1>🌅 Sunset Mode</h1>
+    </header>
+
+    <div id="pick" class="card">
+        <div class="muted">Loading tonight's pick…</div>
+    </div>
+
+    <div class="row">
+        <label class="toggle">
+            <input type="checkbox" id="enabled" checked>
+            <span>Enabled</span>
+        </label>
+    </div>
+
+    <div class="row">
+        <button id="preview">Preview warming (60s)</button>
+    </div>
+
+    <div class="row">
+        <button id="refresh" class="link">Refresh forecast</button>
+    </div>
+
+    <footer>
+        <a href="https://samiprehn.github.io/sd-sunset/" target="_blank">Live forecast →</a>
+    </footer>
+
+    <script src="popup.js"></script>
+</body>
+</html>

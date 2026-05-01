@@ -29,10 +29,10 @@ function applyState(state) {
     } else if (state.phase === 'peak') {
         el.style.opacity = String(PEAK_OPACITY);
     } else if (state.phase === 'fade') {
-        // Fade from peak → 0 over the next 30 min. Recompute periodically below.
-        const start = state.sunsetMs; // fade started at sunset
-        const span = 30 * 60 * 1000;
-        const elapsed = Math.min(Math.max(Date.now() - start, 0), span);
+        // Fade from peak → 0 over T+1min to T+15min (14-minute window).
+        const fadeStart = state.sunsetMs + 1 * 60 * 1000;
+        const span = 14 * 60 * 1000;
+        const elapsed = Math.min(Math.max(Date.now() - fadeStart, 0), span);
         const opacity = PEAK_OPACITY * (1 - elapsed / span);
         el.style.opacity = String(Math.max(opacity, 0));
     }

@@ -10,8 +10,8 @@ If the forecast grades the night a **D or F** (marine layer, low clouds, hazy), 
 
 - **T – 60 min**: Notification with tonight's pick. Color overlay fades in across all tabs.
 - **T – 60 min → T**: Overlay opacity ramps to 45% over the hour.
-- **T**: Peak warm.
-- **T → T + 30 min**: Overlay fades back to nothing.
+- **T → T + 1 min**: Peak warm (brief).
+- **T + 1 min → T + 15 min**: Overlay fades back to nothing.
 
 ## Install (unpacked)
 

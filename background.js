@@ -212,8 +212,8 @@ async function scheduleNextNudge() {
     chrome.alarms.create('sunset-nudge', { when: fireAt });
     const sunsetMs = target.getTime();
     chrome.alarms.create('sunset-peak',     { when: sunsetMs });
-    chrome.alarms.create('sunset-fade',     { when: sunsetMs + 30 * 60000 });
-    chrome.alarms.create('sunset-off',      { when: sunsetMs + 60 * 60000 });
+    chrome.alarms.create('sunset-fade',     { when: sunsetMs + 1 * 60000 });
+    chrome.alarms.create('sunset-off',      { when: sunsetMs + 15 * 60000 });
     await chrome.storage.local.set({ nextSunset: sunsetMs, nextNudge: fireAt });
     console.log('Next sunset', target.toString(), 'nudge at', new Date(fireAt).toString());
 }

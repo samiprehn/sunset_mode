@@ -201,6 +201,11 @@ async function pickTopSpot(sunsetDate) {
 
 // ── Alarm scheduling ──────────────────────────────────────────────────────
 async function scheduleNextNudge() {
+    // Clean up any stale overlay state from a missed off-alarm cycle.
+    const { overlay } = await chrome.storage.local.get('overlay');
+    if (overlay && overlay.sunsetMs && Date.now() > overlay.sunsetMs + 2 * 60 * 60 * 1000) {
+        await chrome.storage.local.remove('overlay');
+    }
     const now = new Date();
     let target = sunsetForDate(now);
     if (!target || target.getTime() - NUDGE_LEAD_MINUTES * 60000 < now.getTime()) {
@@ -276,7 +281,8 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         case 'sunset-peak':  broadcastOverlay({ phase: 'peak', sunsetMs: todaySunset }); break;
         case 'sunset-fade':  broadcastOverlay({ phase: 'fade', sunsetMs: todaySunset }); break;
         case 'sunset-off':
-            broadcastOverlay({ phase: 'off' });
+            await broadcastOverlay({ phase: 'off' });
+            await chrome.storage.local.remove('overlay');
             scheduleNextNudge();
             break;
     }

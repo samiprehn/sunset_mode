@@ -20,6 +20,14 @@ function applyState(state) {
         el.style.opacity = '0';
         return;
     }
+    // Freshness guard: if the state is more than ~2 hours past its sunset, treat
+    // as stale (can happen if Chrome was closed when the off alarm should have
+    // fired). Snap to 0 instead of re-applying yesterday's amber.
+    if (state.sunsetMs && Date.now() > state.sunsetMs + 2 * 60 * 60 * 1000) {
+        el.style.opacity = '0';
+        chrome.storage?.local.remove('overlay').catch(() => {});
+        return;
+    }
     if (state.phase === 'ramp') {
         // Linear ramp from 10% → PEAK over the time between startedAt and sunsetMs (~30 min normally).
         const span = Math.max(state.sunsetMs - state.startedAt, 1);

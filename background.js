@@ -11,7 +11,7 @@ const SITE_URL = 'https://samiprehn.github.io/sd-sunset/';
 const TAF_WORKER = 'https://sd-sunset-taf.sami-prehn.workers.dev';
 
 // Skip the nudge if the top spot grades D or F (no point — sunset will be a dud).
-const MIN_GRADE_RANK = { 'A+': 0, A: 1, B: 2, C: 3, D: 4, F: 5 };
+const MIN_GRADE_RANK = { 'A+': 0, A: 1, B: 2, C: 3, 'C-': 3, D: 4, F: 5 };
 const SKIP_THRESHOLD = MIN_GRADE_RANK.C; // grade rank > C → skip
 
 // ── Spots (mirrors sd_sunset/index.html) ───────────────────────────────────
@@ -155,7 +155,7 @@ function gradeFor(label) {
     if (label === 'Clear & golden')      return 'C';
     if (label === 'Hazy')                return 'D';
     if (label.startsWith('Low clouds'))  return 'D';
-    if (label.startsWith('Patchy low'))  return 'C';
+    if (label.startsWith('Patchy low'))  return 'C-';
     if (label === 'Marine layer')        return 'F';
     if (label === 'Socked in')           return 'D';
     return 'D';
